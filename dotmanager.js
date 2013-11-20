@@ -13,7 +13,7 @@ Dot.prototype.positionOnMap = function(aMap) {
     $(this.div).css({'left': Math.round(xVal) + 'px',
                      'top': Math.round(yVal) + 'px',
                      'position': 'fixed'});
-}
+};
 
 function DotManager(aMap) {
     this.map = aMap;
@@ -29,11 +29,11 @@ DotManager.prototype.addDot = function(loc) {
     this.dots.push(dot);
     $('#dotdiv').append($(div));
     dot.positionOnMap(this.map);
-}
+};
 
 DotManager.prototype.handleResize = function() {
     for (var i = 0; i < this.dots.length; i++) {
         this.dots[i].positionOnMap(this.map);
     }
-}
+};
 
