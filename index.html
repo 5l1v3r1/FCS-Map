@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <style type="text/css">
+        <!--
+        body {
+            margin: 0;
+        }
+        -->
+        </style>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	    <script type="text/javascript" src="map.js"></script>
+	    <script type="text/javascript" src="sequence.js"></script>
+	    <script type="text/javascript" src="dotmanager.js"></script>
+        <script type="text/javascript">
+        <!--
+        var map = null;
+        var manager = null;
+        function getHeight() {
+            return "innerHeight" in window 
+                   ? window.innerHeight
+                   : document.documentElement.offsetHeight; 
+        }
+        function getWidth() {
+            return "innerWidth" in window 
+                   ? window.innerWidth
+                   : document.documentElement.offsetWidth;
+        }
+        function doLayout() {
+            var width = getWidth(), height = getHeight();
+            map.layout(width, height);
+            if (manager) manager.handleResize();
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var embed = document.querySelector('#svgembed');
+            embed.addEventListener('load', function() {
+                map = new VectorMap(embed);
+                $(window).resize(doLayout);
+                doLayout();
+                var buildingColor = '#FFFFFF';
+                var roadColor = '#F2F0E9';
+                var fieldColor = '#30A854';
+                //var fieldColor = '#CADFAA';
+                map.setColor('main', buildingColor);
+                map.setColor('fcc', buildingColor);
+                map.setColor('language', buildingColor);
+                map.setColor('library', buildingColor);
+                map.setColor('shallcross', buildingColor);
+                map.setColor('shamada', buildingColor);
+                map.setColor('middle-school', buildingColor);
+                map.setColor('track', '#d5583C', fieldColor);
+                map.setPathColor('#A5583C');
+                map.setParkingColor(roadColor, fieldColor);
+                // fields
+                map.setColor('field-hockey-field', fieldColor);
+                map.setColor('baseball-soccer-field', fieldColor);
+                map.setColor('baseball-soccer-field-2', fieldColor);
+                map.setColor('city-ave-field', fieldColor);
+                map.setColor('lacrosse-field', fieldColor);
+                map.setColor('tennis', '#259745');
+                manager = new DotManager(map);
+                // buildings dots
+                var buildings = Object.keys(map.getBuildings());
+                for (var i = 0; i < buildings.length; i++) {
+                    var building = buildings[i];
+                    if (building == 'oval' || building == 'parking') continue;
+                    manager.addDot(map.buildingLocation(buildings[i]));
+                }
+            });
+        });
+        -->
+        </script>
+    </head>
+    <body bgcolor="#D9D5CC"><!#E9E5DC!>
+        <div align="right">
+            <object data="fcsmap.svg" id="svgembed"></object>
+        <!--<div id="hitmap" style="position:fixed; right: 0px; top: 0px; width: 200px; height: 200px"></div>-->
+        </div>
+        <div id="dotdiv" style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px"></div>
+    </body>
+</html>
