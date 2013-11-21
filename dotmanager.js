@@ -18,7 +18,8 @@ Dot.prototype.positionOnMap = function(aMap) {
     $(this.blurb).css({'font-size': Math.round(this.sequence.dimensions[0] * 0.6) + 'px'});
     $(this.blurb).css({'left': Math.round(xVal + this.sequence.dimensions[0]) + 'px',
                        'top': Math.round(pos[1] - $(this.blurb).innerHeight() / 2) + 'px',
-                       'position': 'fixed'});
+                       'position': 'fixed',
+                       'text-shadow': '0px 0px ' + Math.round(this.sequence.dimensions[0] / 2) + 'px rgba(0, 0, 0, 0.7)'});
 };
 
 function DotManager(aMap) {
@@ -38,8 +39,7 @@ DotManager.prototype.addDot = function(loc, html) {
     // create blurb div
     var blurb = document.createElement('div');
     blurb.innerHTML = html;
-    $(blurb).css({'text-shadow': '0px 0px 9px #000000',
-                  'color': '#0000FF', 'font-family': 'Arial'});
+    $(blurb).css({'color': '#0000FF', 'font-family': 'Arial'});
     $('#dotdiv').append($(blurb));
 
     var dot = new Dot(sequence, div, blurb, loc);

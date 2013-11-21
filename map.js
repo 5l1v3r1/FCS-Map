@@ -59,7 +59,7 @@ VectorMap.prototype.setColor = function(building, color, _field) {
 
 VectorMap.prototype.setPathColor = function(color) {
     this.root().getElementById('path').children[0].setAttribute('fill', color);
-    this.root().getElementById('path').children[0].setAttribute('stroke', color);
+    this.root().getElementById('path').children[0].setAttribute('stroke', 'none');
     var oval = this.root().getElementById('Oval');
     for (var i = 0; i < oval.children.length; i++) {
         var child = oval.children[i];
