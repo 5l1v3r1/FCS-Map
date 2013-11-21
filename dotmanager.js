@@ -1,6 +1,7 @@
-function Dot(sequence, div, loc) {
+function Dot(sequence, div, blurb, loc) {
     this.sequence = sequence;
     this.div = div;
+    this.blurb = blurb;
     this.loc = loc;
 }
 
@@ -13,6 +14,11 @@ Dot.prototype.positionOnMap = function(aMap) {
     $(this.div).css({'left': Math.round(xVal) + 'px',
                      'top': Math.round(yVal) + 'px',
                      'position': 'fixed'});
+    // setup blurb
+    $(this.blurb).css({'font-size': Math.round(this.sequence.dimensions[0] * 0.6) + 'px'});
+    $(this.blurb).css({'left': Math.round(xVal + this.sequence.dimensions[0]) + 'px',
+                       'top': Math.round(pos[1] - $(this.blurb).innerHeight() / 2) + 'px',
+                       'position': 'fixed'});
 };
 
 function DotManager(aMap) {
@@ -20,15 +26,26 @@ function DotManager(aMap) {
     this.dots = [];
 }
 
-DotManager.prototype.addDot = function(loc) {
+DotManager.prototype.addDot = function(loc, html) {
     var sequence = new Sequence('BlueDot_Flat', 90, 'BlueDot_', [60, 60]);
+
+    // create dot div
     var div = document.createElement('div');
     sequence.attachToDiv(div);
     sequence.startAnimating();
-    var dot = new Dot(sequence, div, loc);
-    this.dots.push(dot);
     $('#dotdiv').append($(div));
+
+    // create blurb div
+    var blurb = document.createElement('div');
+    blurb.innerHTML = html;
+    $(blurb).css({'text-shadow': '0px 0px 9px #000000',
+                  'color': '#0000FF', 'font-family': 'Arial'});
+    $('#dotdiv').append($(blurb));
+
+    var dot = new Dot(sequence, div, blurb, loc);
+    this.dots.push(dot);
     dot.positionOnMap(this.map);
+    return dot;
 };
 
 DotManager.prototype.handleResize = function() {

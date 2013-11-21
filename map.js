@@ -95,7 +95,7 @@ VectorMap.prototype.getBuildings = function() {
             'main': 'Main',
             'language': 'Language',
             'fcc': 'FCC',
-            'shamada': 'Shamada',
+            'shimada': 'Shimada',
             'city-ave-field': 'city_ave_field',
             'field-hockey-field': 'field_hockey',
             'tennis': 'Lacrosse_Field_4_',
@@ -108,21 +108,42 @@ VectorMap.prototype.buildingLocation = function(building) {
         'track': [96, 82],
         'tennis': [173, 67],
         'fcc': [131, 98],
-        'shamada': [151, 72],
+        'shimada': [145, 75],
         'language': [116, 116],
         'city-ave-field': [105, 171],
         'library': [162, 100],
-        'middle-school': [174, 97],
+        'middle-school': [174, 90],
         'shallcross': [170, 121],
         'oval': [147, 107],
         'field-hockey-field': [91, 127],
         'lacrosse-field': [43, 69],
         'baseball-soccer-field': [28, 38],
         'parking': [153, 153],
-        'baseball-soccer-field-2': [125, 68],
+        'baseball-soccer-field-2': [125, 62],
         'main': [137, 133]
     }
     return locations[building] || null;
+};
+
+VectorMap.prototype.getBuildingTitle = function(building) {
+    var mapping = {
+        'fcc': 'FCC',
+        'field-hockey-field': 'Field Hockey',
+        'city-ave-field': 'City Ave. Field',
+        'baseball-soccer-field-2': 'Softball/Boys Soccer',
+        'baseball-soccer-field': 'Baseball/Girls Soccer'
+    };
+    if (!mapping[building]) {
+        var comps = building.split('-');
+        var newStr = '';
+        for (var i = 0; i < comps.length; i++) {
+            var word = comps[i];
+            word = word[0].toUpperCase() + word.substring(1);
+            newStr += (i ? ' ' : '') + word;
+        }
+        return newStr;
+    }
+    return mapping[building];
 };
 
 VectorMap.prototype.getScale = function() {

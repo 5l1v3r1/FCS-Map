@@ -45,7 +45,7 @@
                 map.setColor('language', buildingColor);
                 map.setColor('library', buildingColor);
                 map.setColor('shallcross', buildingColor);
-                map.setColor('shamada', buildingColor);
+                map.setColor('shimada', buildingColor);
                 map.setColor('middle-school', buildingColor);
                 map.setColor('track', '#d5583C', fieldColor);
                 map.setPathColor('#A5583C');
@@ -63,7 +63,8 @@
                 for (var i = 0; i < buildings.length; i++) {
                     var building = buildings[i];
                     if (building == 'oval' || building == 'parking') continue;
-                    manager.addDot(map.buildingLocation(buildings[i]));
+                    var title = map.getBuildingTitle(building);
+                    manager.addDot(map.buildingLocation(buildings[i]), title);
                 }
             });
         });
